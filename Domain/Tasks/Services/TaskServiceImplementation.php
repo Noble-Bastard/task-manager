@@ -2,45 +2,50 @@
 
 namespace Domain\Tasks\Services;
 
+use Domain\Tasks\DTO\TaskDTO;
+use Domain\Tasks\Interfaces\TaskRepository;
 use Domain\Tasks\Interfaces\TaskService;
 use Domain\Tasks\Models\Task;
+use Illuminate\Database\Eloquent\Collection;
 
 class TaskServiceImplementation implements TaskService
 {
 
-    /**
-     * @param int $id
-     * @return Task|null
-     */
+    public function __construct(private readonly TaskRepository $taskRepository)
+    {
+    }
+
     public function getTask(int $id): ?Task
     {
-        // TODO: Implement getTask() method.
+        return $this->taskRepository->findById($id);
     }
 
-    /**
-     * @param Task $task
-     * @return Task
-     */
-    public function create(Task $task): Task
+    public function create(TaskDTO $taskDTO): Task
     {
-        // TODO: Implement create() method.
+        return $this->taskRepository->save($taskDTO);
     }
 
-    /**
-     * @param Task $task
-     * @return bool
-     */
-    public function delete(Task $task): bool
+    public function delete(int $taskId): bool
     {
-        // TODO: Implement delete() method.
+        return $this->taskRepository->delete($taskId);
     }
 
-    /**
-     * @param int $id
-     * @return Task|null
-     */
     public function getByUserId(int $id): ?Task
     {
-        // TODO: Implement getByUserId() method.
+        return $this->taskRepository->findByUser($id);
+    }
+
+    public function all(): Collection
+    {
+        return $this->taskRepository->all();
+    }
+
+    /**
+     * @param TaskDTO $taskDTO
+     * @return Task
+     */
+    public function update(TaskDTO $taskDTO): Task
+    {
+        return $this->taskRepository->update($taskDTO);
     }
 }

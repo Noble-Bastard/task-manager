@@ -2,32 +2,40 @@
 
 namespace Domain\Tasks\Interfaces;
 
-use App\Models\User;
+use Domain\Tasks\DTO\TaskDTO;
 use Domain\Tasks\Models\Task;
 
 interface TaskRepository
 {
     /**
-     * @param int $id
+     * @param int $taskId
      * @return Task|null
      */
-    public function findById(int $id): ?Task;
+    public function findById(int $taskId): ?Task;
+
+    public function all();
 
     /**
-     * @param Task $task
+     * @param TaskDTO $taskDTO
      * @return Task
      */
-    public function save(Task $task): Task;
+    public function save(TaskDTO $taskDTO): Task;
 
     /**
-     * @param Task $task
+     * @param TaskDTO $taskDTO
+     * @return Task
+     */
+    public function update(TaskDTO $taskDTO): Task;
+
+    /**
+     * @param int $taskId
      * @return bool
      */
-    public function delete(Task $task): bool;
+    public function delete(int $taskId): bool;
 
     /**
-     * @param User $user
+     * @param int $userId
      * @return Task|null
      */
-    public function findByUser(User $user): ?Task;
+    public function findByUser(int $userId): ?Task;
 }

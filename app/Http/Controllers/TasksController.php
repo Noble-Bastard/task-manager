@@ -2,32 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use Domain\Tasks\Models\Task;
+use Domain\Tasks\Interfaces\TaskService;
 use Domain\Tasks\Requests\StoreTasksRequest;
 use Domain\Tasks\Requests\UpdateTasksRequest;
 use Domain\Tasks\Resources\TaskResource;
-use Illuminate\Http\Response;
+use Illuminate\Database\Eloquent\Collection;
 
 class TasksController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return TaskResource[]
-     */
-    public function index()
+    public function __construct(private readonly TaskService $taskService)
     {
-        //
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Display a listing of the resource.
      *
-     * @return Response
+     * @return Collection
      */
-    public function create()
+    public function index(): Collection
     {
-        //
+        return $this->taskService->all();
     }
 
     /**
@@ -36,53 +30,51 @@ class TasksController extends Controller
      * @param StoreTasksRequest $request
      * @return TaskResource
      */
-    public function store(StoreTasksRequest $request)
+    public function store(StoreTasksRequest $request): TaskResource
     {
-        //
+        $taskDTO = $request->toDto();
+        $task = $this->taskService->create($taskDTO);
+
+        return new TaskResource($task);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param Task $tasks
+     * @param int $taskId
      * @return TaskResource
      */
-    public function show(Task $tasks)
+    public function show(int $taskId): TaskResource
     {
-        //
-    }
+        $task = $this->taskService->getTask($taskId);
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param Task $tasks
-     * @return TaskResource
-     */
-    public function edit(Task $tasks)
-    {
-        //
+        return new TaskResource($task);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Domain\Tasks\Requests\UpdateTasksRequest  $request
-     * @param Task $tasks
+     * @param UpdateTasksRequest $request
      * @return TaskResource
      */
-    public function update(UpdateTasksRequest $request, Task $tasks)
+    public function update(UpdateTasksRequest $request): TaskResource
     {
-        //
+        $taskDTO = $request->toDto();
+        $task = $this->taskService->update($taskDTO);
+
+        return new TaskResource($task);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param Task $tasks
-     * @return TaskResource
+     * @param int $taskId
+     * @return array
      */
-    public function destroy(Task $tasks)
+    public function destroy(int $taskId): array
     {
-        //
+        $status = $this->taskService->delete($taskId);
+
+        return ['success' => $status];
     }
 }

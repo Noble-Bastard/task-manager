@@ -2,8 +2,9 @@
 
 namespace Domain\Tasks\Interfaces;
 
-use App\Models\User;
+use Domain\Tasks\DTO\TaskDTO;
 use Domain\Tasks\Models\Task;
+use Illuminate\Database\Eloquent\Collection;
 
 interface TaskService
 {
@@ -14,20 +15,31 @@ interface TaskService
     public function getTask(int $id): ?Task;
 
     /**
-     * @param Task $task
+     * @param TaskDTO $taskDTO
      * @return Task
      */
-    public function create(Task $task): Task;
+    public function create(TaskDTO $taskDTO): Task;
 
     /**
-     * @param Task $task
+     * @param TaskDTO $taskDTO
+     * @return Task
+     */
+    public function update(TaskDTO $taskDTO): Task;
+
+    /**
+     * @param int $taskId
      * @return bool
      */
-    public function delete(Task $task): bool;
+    public function delete(int $taskId): bool;
 
     /**
      * @param int $id
      * @return Task|null
      */
     public function getByUserId(int $id): ?Task;
+
+    /**
+     * @return Collection
+     */
+    public function all(): Collection;
 }

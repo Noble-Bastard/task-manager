@@ -2,6 +2,7 @@
 
 namespace Domain\Tasks\Requests;
 
+use Domain\Tasks\DTO\TaskDTO;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateTasksRequest extends FormRequest
@@ -24,7 +25,19 @@ class UpdateTasksRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'id' => 'required|int|exists:tasks,id',
+            'title' => 'required|string',
+            'description' => 'required|string',
+            'user_id' => 'required|int|exists:users,id',
+            'status' => 'required|string',
         ];
+    }
+
+    /**
+     * @return TaskDTO
+     */
+    public function toDto(): TaskDTO
+    {
+        return new TaskDTO(...$this->validated());
     }
 }

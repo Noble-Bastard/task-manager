@@ -5,6 +5,7 @@ namespace App\Policies;
 use App\Models\User;
 use Domain\Tasks\Models\Task;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Auth\Access\Response;
 
 class TasksPolicy
 {
@@ -13,7 +14,7 @@ class TasksPolicy
     /**
      * Determine whether the user can create models.
      *
-     * @param  \App\Models\User  $user
+     * @param User $user
      * @return bool
      */
     public function create(User $user)
@@ -26,9 +27,9 @@ class TasksPolicy
     /**
      * Determine whether the user can update the model.
      *
-     * @param  \App\Models\User  $user
-     * @param  \Domain\Tasks\Models\Task  $tasks
-     * @return \Illuminate\Auth\Access\Response|bool
+     * @param User $user
+     * @param Task $tasks
+     * @return Response|bool
      */
     public function update(User $user)
     {
@@ -39,9 +40,9 @@ class TasksPolicy
     /**
      * Determine whether the user can delete the model.
      *
-     * @param  \App\Models\User  $user
-     * @param  \Domain\Tasks\Models\Task  $tasks
-     * @return \Illuminate\Auth\Access\Response|bool
+     * @param User $user
+     * @param Task $tasks
+     * @return Response|bool
      */
     public function delete(User $user, Task $tasks)
     {

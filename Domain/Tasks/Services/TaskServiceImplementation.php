@@ -6,8 +6,8 @@ use Domain\Tasks\DTO\TaskDTO;
 use Domain\Tasks\Interfaces\TaskRepository;
 use Domain\Tasks\Interfaces\TaskService;
 use Domain\Tasks\Models\Task;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 
 class TaskServiceImplementation implements TaskService
 {

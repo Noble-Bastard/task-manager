@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Exception;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -46,9 +47,9 @@ class UserController extends Controller
             Auth::login($user);
 
             return redirect('/tasks'); // Redirect to a protected page
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             // Log the exception for debugging
-            throw new \Exception($e->getMessage());
+            throw new Exception($e->getMessage());
             die;
 
             // Handle the error and return a response as needed

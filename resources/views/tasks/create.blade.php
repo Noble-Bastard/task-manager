@@ -18,7 +18,7 @@
             <option value="completed">Completed</option>
         </select>
         <label>
-            <input name="user_id" value="1" hidden="">
+            <input name="user_id" value="{{Auth::user()->id}}" hidden="">
         </label>
 
         <button type="submit">Create Task</button>

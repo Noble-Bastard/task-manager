@@ -9,8 +9,8 @@ enum TaskStatusEnum: string
     public static function values(): array
     {
         return [
-            self::COMPLETED,
-            self::TODO,
+            self::COMPLETED->value,
+            self::TODO->value,
         ];
     }
 

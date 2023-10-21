@@ -6,16 +6,22 @@
     <form method="POST" action="{{ route('tasks.store') }}">
         @csrf
 
-        <div class="form-group">
-            <label for="title">Title:</label>
-            <input type="text" name="title" class="form-control" required>
-        </div>
+        <label for="title">Title</label>
+        <input type="text" name="title" required>
 
-        <div class="form-group">
-            <label for="description">Description:</label>
-            <textarea name="description" class="form-control" rows="3" required></textarea>
-        </div>
+        <label for="description">Description</label>
+        <textarea name="description" required></textarea>
 
-        <button type="submit" class="btn btn-primary">Save Task</button>
+        <label for="status">Status</label>
+        <select name="status" id="status">
+            <option value="todo">Todo</option>
+            <option value="completed">Completed</option>
+        </select>
+        <label>
+            <input name="user_id" value="1" hidden="">
+        </label>
+
+        <button type="submit">Create Task</button>
     </form>
+
 @endsection

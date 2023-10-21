@@ -5,6 +5,7 @@ namespace Domain\Tasks\Interfaces;
 use Domain\Tasks\DTO\TaskDTO;
 use Domain\Tasks\Models\Task;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Builder;
 
 interface TaskService
 {
@@ -34,9 +35,9 @@ interface TaskService
 
     /**
      * @param int $id
-     * @return Task|null
+     * @return Builder
      */
-    public function getByUserId(int $id): ?Task;
+    public function getByUserId(int $id): Builder;
 
     /**
      * @return Collection

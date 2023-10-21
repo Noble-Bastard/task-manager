@@ -3,7 +3,7 @@
 namespace App\Policies;
 
 use App\Models\User;
-use Domain\Tasks\Models\Tasks;
+use Domain\Tasks\Models\Task;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class TasksPolicy
@@ -11,84 +11,41 @@ class TasksPolicy
     use HandlesAuthorization;
 
     /**
-     * Determine whether the user can view any models.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function viewAny(User $user)
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can view the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \Domain\Tasks\Models\Tasks  $tasks
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function view(User $user, Tasks $tasks)
-    {
-        //
-    }
-
-    /**
      * Determine whether the user can create models.
      *
      * @param  \App\Models\User  $user
-     * @return \Illuminate\Auth\Access\Response|bool
+     * @return bool
      */
     public function create(User $user)
     {
-        //
+        // You can implement your authorization logic here.
+        // For example, allow all authenticated users to create tasks.
+        return true;
     }
 
     /**
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \Domain\Tasks\Models\Tasks  $tasks
+     * @param  \Domain\Tasks\Models\Task  $tasks
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Tasks $tasks)
+    public function update(User $user)
     {
-        //
+        return true;
+
     }
 
     /**
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \Domain\Tasks\Models\Tasks  $tasks
+     * @param  \Domain\Tasks\Models\Task  $tasks
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Tasks $tasks)
+    public function delete(User $user, Task $tasks)
     {
-        //
-    }
+        return true;
 
-    /**
-     * Determine whether the user can restore the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \Domain\Tasks\Models\Tasks  $tasks
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function restore(User $user, Tasks $tasks)
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \Domain\Tasks\Models\Tasks  $tasks
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function forceDelete(User $user, Tasks $tasks)
-    {
-        //
     }
 }

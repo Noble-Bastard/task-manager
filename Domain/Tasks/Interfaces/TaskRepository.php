@@ -4,6 +4,7 @@ namespace Domain\Tasks\Interfaces;
 
 use Domain\Tasks\DTO\TaskDTO;
 use Domain\Tasks\Models\Task;
+use Illuminate\Database\Eloquent\Builder;
 
 interface TaskRepository
 {
@@ -35,7 +36,7 @@ interface TaskRepository
 
     /**
      * @param int $userId
-     * @return Task|null
+     * @return Builder
      */
-    public function findByUser(int $userId): ?Task;
+    public function findByUser(int $userId): Builder;
 }

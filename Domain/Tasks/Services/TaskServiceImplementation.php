@@ -7,6 +7,7 @@ use Domain\Tasks\Interfaces\TaskRepository;
 use Domain\Tasks\Interfaces\TaskService;
 use Domain\Tasks\Models\Task;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Builder;
 
 class TaskServiceImplementation implements TaskService
 {
@@ -30,7 +31,7 @@ class TaskServiceImplementation implements TaskService
         return $this->taskRepository->delete($taskId);
     }
 
-    public function getByUserId(int $id): ?Task
+    public function getByUserId(int $id): Builder
     {
         return $this->taskRepository->findByUser($id);
     }

@@ -9,14 +9,14 @@ class TaskDTO
      * @param string $title
      * @param string $description
      * @param string $status
-     * @param int $userId
+     * @param int $user_id
      */
     public function __construct(
-        public readonly int|null    $id,
         public readonly string $title,
         public readonly string $description,
         public readonly string $status,
-        public readonly int    $userId,
+        public readonly int    $user_id,
+        public readonly int|null    $id = null,
     )
     {
     }

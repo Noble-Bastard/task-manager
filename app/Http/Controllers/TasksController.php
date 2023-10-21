@@ -9,6 +9,8 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TasksController extends Controller
 {
@@ -24,9 +26,21 @@ class TasksController extends Controller
      *
      * @return Application|Factory|View
      */
-    public function index(): View|Factory|Application
+    public function index(Request $request): View|Factory|Application
     {
-        $tasks = $this->taskService->all();
+        // TODO: Make a custom request and custom Search class for filters
+        $query = $this->taskService->getByUserId(Auth::user()->id);
+
+        if ($request->has('status')) {
+            $query->where('status', $request->get('status'));
+        }
+
+        if ($request->filled('created_at')) {
+            $query->whereDate('created_at', $request->get('created_at'));
+        }
+
+        $tasks = $query->paginate(10);
+
         return view('tasks.index', compact('tasks'));
     }
 

@@ -5,6 +5,7 @@ namespace Domain\Tasks\Repositories;
 use Domain\Tasks\DTO\TaskDTO;
 use Domain\Tasks\Interfaces\TaskRepository;
 use Domain\Tasks\Models\Task;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
 
@@ -37,14 +38,11 @@ class TaskRepositoryImplementation implements TaskRepository
 
     /**
      * @param int $userId
-     * @return Task|null
+     * @return Builder
      */
-    public function findByUser(int $userId): ?Task
+    public function findByUser(int $userId): Builder
     {
-        /** @var Task $task */
-        $task = Task::query()->where('user_id', $userId);
-
-        return $task;
+        return Task::query()->where('user_id', $userId);
     }
 
     /**
@@ -68,7 +66,7 @@ class TaskRepositoryImplementation implements TaskRepository
         $task->title = $taskDTO->title;
         $task->description = $taskDTO->description;
         $task->status = $taskDTO->status;
-        $task->user_id = $taskDTO->userId;
+        $task->user_id = $taskDTO->user_id;
 
         if (!$task->save()) {
             throw new UnprocessableEntityHttpException('Unprocessable entity');
@@ -87,7 +85,7 @@ class TaskRepositoryImplementation implements TaskRepository
         $task->title = $taskDTO->title;
         $task->description = $taskDTO->description;
         $task->status = $taskDTO->status;
-        $task->user_id = $taskDTO->userId;
+        $task->user_id = $taskDTO->user_id;
 
         if (!$task->save()) {
             throw new UnprocessableEntityHttpException('Unprocessable entity');

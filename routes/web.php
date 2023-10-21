@@ -20,13 +20,13 @@ Route::get('/login', [UserController::class, 'showLoginForm'])->name('login');
 Route::post('/registerPost', [UserController::class, 'register'])->name('registerPost');
 Route::post('/loginPost', [UserController::class, 'login'])->name('loginPost');
 
-Route::middleware(['auth'])->group(function () {
+//Route::middleware(['auth'])->group(function () {
     Route::get('/tasks', [TasksController::class, 'index'])->name('tasks.index');
     Route::get('/tasks/create', [TasksController::class, 'create'])->name('tasks.create');
     Route::post('/tasks', [TasksController::class, 'store'])->name('tasks.store');
     Route::get('/tasks/{taskId}', [TasksController::class, 'show'])->name('tasks.show');
     Route::get('/tasks/{taskId}/edit', [TasksController::class, 'edit'])->name('tasks.edit');
-    Route::put('/tasks/{taskId}', [TasksController::class, 'update'])->name('tasks.update');
+    Route::post('/tasks/update/', [TasksController::class, 'update'])->name('tasks.update');
     Route::delete('/tasks/{taskId}', [TasksController::class, 'destroy'])->name('tasks.destroy');
-});
+//});
 
